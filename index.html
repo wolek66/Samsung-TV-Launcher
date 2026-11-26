@@ -6,6 +6,7 @@
 <title>Samsung TV Premium Launcher</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -47,6 +48,7 @@ body{
 }
 
 .app{
+
     width:220px;
     height:160px;
 
@@ -74,8 +76,8 @@ body{
     transform:scale(1.08);
     box-shadow:0 0 30px rgba(56,189,248,.5);
 }
-</style>
 
+</style>
 </head>
 
 <body>
@@ -125,26 +127,80 @@ function updateClock(){
 
     document.getElementById('clock').innerText =
         now.toLocaleTimeString(
-        'pl-PL',
-        {
-            hour:'2-digit',
-            minute:'2-digit'
-        });
+            'pl-PL',
+            {
+                hour:'2-digit',
+                minute:'2-digit'
+            }
+        );
 
     document.getElementById('date').innerText =
         now.toLocaleDateString(
-        'pl-PL',
-        {
-            weekday:'long',
-            day:'numeric',
-            month:'long',
-            year:'numeric'
-        });
+            'pl-PL',
+            {
+                weekday:'long',
+                day:'numeric',
+                month:'long',
+                year:'numeric'
+            }
+        );
 }
 
 updateClock();
 
 setInterval(updateClock,1000);
+
+/* ===== NAWIGACJA PILOTEM ===== */
+
+const apps = document.querySelectorAll(".app");
+
+let selected = 0;
+
+function updateSelection(){
+
+    apps.forEach(app => {
+        app.classList.remove("selected");
+    });
+
+    apps[selected].classList.add("selected");
+}
+
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "ArrowRight"){
+
+        selected++;
+
+        if(selected >= apps.length){
+            selected = 0;
+        }
+
+        updateSelection();
+    }
+
+    if(e.key === "ArrowLeft"){
+
+        selected--;
+
+        if(selected < 0){
+            selected = apps.length - 1;
+        }
+
+        updateSelection();
+    }
+
+    if(e.key === "Enter"){
+
+        const appName =
+            apps[selected]
+            .innerText
+            .replace(/\n/g," ")
+            .trim();
+
+        alert("Uruchom: " + appName);
+    }
+
+});
 
 </script>
 
