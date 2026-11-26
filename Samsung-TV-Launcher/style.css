@@ -1,0 +1,43 @@
+body{
+    margin:0;
+    background:#0f172a;
+    color:white;
+    font-family:Segoe UI,Arial,sans-serif;
+
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.clock{
+    font-size:140px;
+    font-weight:bold;
+    margin-bottom:70px;
+}
+
+.apps{
+    display:flex;
+    gap:20px;
+}
+
+.app{
+    width:220px;
+    height:140px;
+
+    border-radius:16px;
+
+    background:#1e293b;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:28px;
+}
+
+.selected{
+    border:4px solid #38bdf8;
+}
