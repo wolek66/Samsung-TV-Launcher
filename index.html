@@ -3,15 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Samsung TV Launcher</title>
+<title>Samsung TV Premium Launcher</title>
 
 <style>
-body{
+*{
     margin:0;
-    background:#0f172a;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:
+        radial-gradient(circle at top right,#2563eb 0%,transparent 30%),
+        radial-gradient(circle at bottom left,#7c3aed 0%,transparent 30%),
+        #0f172a;
+
     color:white;
-    font-family:Arial,sans-serif;
+    font-family:Segoe UI,Arial,sans-serif;
     height:100vh;
+    overflow:hidden;
 
     display:flex;
     flex-direction:column;
@@ -20,63 +30,122 @@ body{
 }
 
 .clock{
-    font-size:120px;
-    font-weight:bold;
-    margin-bottom:50px;
+    font-size:150px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.date{
+    font-size:28px;
+    color:#cbd5e1;
+    margin-bottom:60px;
 }
 
 .apps{
     display:flex;
-    gap:20px;
+    gap:25px;
 }
 
 .app{
-    width:200px;
-    height:120px;
-    background:#1e293b;
-    border-radius:20px;
+    width:220px;
+    height:160px;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(10px);
 
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
 
-    font-size:26px;
+    transition:.2s;
+}
+
+.icon{
+    font-size:56px;
+    margin-bottom:12px;
 }
 
 .selected{
     border:4px solid #38bdf8;
+    transform:scale(1.08);
+    box-shadow:0 0 30px rgba(56,189,248,.5);
 }
 </style>
 
 </head>
+
 <body>
 
-<div id="clock" class="clock">00:00</div>
+<div id="clock" class="clock">
+00:00
+</div>
+
+<div id="date" class="date">
+...
+</div>
 
 <div class="apps">
-<div class="app selected">YouTube</div>
-<div class="app">Netflix</div>
-<div class="app">Spotify</div>
-<div class="app">Tidal</div>
-<div class="app">CANAL+</div>
+
+<div class="app selected">
+<div class="icon">▶️</div>
+<div>YouTube</div>
+</div>
+
+<div class="app">
+<div class="icon">🎬</div>
+<div>Netflix</div>
+</div>
+
+<div class="app">
+<div class="icon">🎵</div>
+<div>Spotify</div>
+</div>
+
+<div class="app">
+<div class="icon">🔊</div>
+<div>Tidal</div>
+</div>
+
+<div class="app">
+<div class="icon">📺</div>
+<div>CANAL+</div>
+</div>
+
 </div>
 
 <script>
+
 function updateClock(){
+
     const now = new Date();
 
-    document.getElementById("clock").innerText =
-    now.toLocaleTimeString(
-       "pl-PL",
-       {
-          hour:"2-digit",
-          minute:"2-digit"
-       }
-    );
+    document.getElementById('clock').innerText =
+        now.toLocaleTimeString(
+        'pl-PL',
+        {
+            hour:'2-digit',
+            minute:'2-digit'
+        });
+
+    document.getElementById('date').innerText =
+        now.toLocaleDateString(
+        'pl-PL',
+        {
+            weekday:'long',
+            day:'numeric',
+            month:'long',
+            year:'numeric'
+        });
 }
 
 updateClock();
+
 setInterval(updateClock,1000);
+
 </script>
 
 </body>
