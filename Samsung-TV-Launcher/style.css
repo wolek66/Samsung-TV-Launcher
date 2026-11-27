@@ -1,42 +1,207 @@
-body {
-    margin: 0;
-    background: #0f172a;
-    color: white;
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.clock {
-    font-size: 140px;
-    font-weight: bold;
-    margin-bottom: 70px;
+body{
+
+    background:
+        radial-gradient(circle at top right,#2563eb 0%,transparent 30%),
+        radial-gradient(circle at bottom left,#7c3aed 0%,transparent 30%),
+        #0f172a;
+
+    color:white;
+    font-family:'Segoe UI',Arial,sans-serif;
+
+    height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
-.apps {
-    display: flex;
-    gap: 20px;
+/* ===== ZEGAR ===== */
+
+.clock{
+    font-size:150px;
+    font-weight:700;
+    line-height:1;
+    margin-bottom:10px;
+    text-shadow:0 4px 20px rgba(0,0,0,.4);
 }
 
-.app {
-    width: 220px;
-    height: 140px;
-
-    border-radius: 16px;
-    background: #1e293b;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 28px;
+.date{
+    font-size:28px;
+    color:#cbd5e1;
+    margin-bottom:60px;
+    text-transform:capitalize;
 }
 
-.selected {
-    border: 4px solid #38bdf8;
+/* ===== KONTENER APLIKACJI ===== */
+
+.apps{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.row{
+    display:flex;
+    gap:25px;
+    justify-content:center;
+}
+
+/* ===== KAFLE ===== */
+
+.app{
+
+    width:220px;
+    height:180px;
+
+    border-radius:24px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    transition:all .25s ease;
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
+
+    cursor:pointer;
+}
+
+/* ===== LOGO ===== */
+
+.logo{
+    width:72px;
+    height:72px;
+    object-fit:contain;
+    margin-bottom:12px;
+}
+
+/* ===== TEKST ===== */
+
+.app-name{
+    font-size:22px;
+    font-weight:600;
+    text-align:center;
+}
+
+/* ===== AKTYWNY KAFEL ===== */
+
+.selected{
+
+    border:4px solid #38bdf8;
+
+    transform:scale(1.08);
+
+    box-shadow:
+        0 0 35px rgba(56,189,248,.6),
+        0 12px 35px rgba(0,0,0,.4);
+
+    z-index:10;
+}
+
+/* ===== HOVER DLA DEBUGOWANIA W PRZEGLĄDARCE ===== */
+
+.app:hover{
+    transform:scale(1.05);
+}
+
+/* ===== KOLORY APLIKACJI ===== */
+
+.youtube{
+    background:linear-gradient(
+        135deg,
+        #ff3b3b,
+        #cc0000
+    );
+}
+
+.netflix{
+    background:linear-gradient(
+        135deg,
+        #e50914,
+        #8a0009
+    );
+}
+
+.spotify{
+    background:linear-gradient(
+        135deg,
+        #1ed760,
+        #168f3e
+    );
+}
+
+.tidal{
+    background:linear-gradient(
+        135deg,
+        #2a2a2a,
+        #000000
+    );
+}
+
+.canal{
+    background:linear-gradient(
+        135deg,
+        #0060ff,
+        #00289e
+    );
+}
+
+.prime{
+    background:linear-gradient(
+        135deg,
+        #00a8e1,
+        #005b7c
+    );
+}
+
+.disney{
+    background:linear-gradient(
+        135deg,
+        #2348ff,
+        #091755
+    );
+}
+
+.plex{
+    background:linear-gradient(
+        135deg,
+        #ffbf32,
+        #b57900
+    );
+}
+
+.kodi{
+    background:linear-gradient(
+        135deg,
+        #2cc0ff,
+        #006eb5
+    );
+}
+
+.smartthings{
+    background:linear-gradient(
+        135deg,
+        #2ea8ff,
+        #005cb1
+    );
+}
+
+.settings{
+    background:linear-gradient(
+        135deg,
+        #64748b,
+        #334155
+    );
 }
