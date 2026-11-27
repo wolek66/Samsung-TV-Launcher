@@ -1,29 +1,241 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Samsung TV Premium Launcher</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:
+        radial-gradient(circle at top right,#2563eb 0%,transparent 30%),
+        radial-gradient(circle at bottom left,#7c3aed 0%,transparent 30%),
+        #0f172a;
+
+    color:white;
+    font-family:'Segoe UI',Arial,sans-serif;
+
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+/* ZEGAR */
+
+.clock{
+    font-size:150px;
+    font-weight:700;
+    line-height:1;
+    margin-bottom:10px;
+    text-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+
+.date{
+    font-size:28px;
+    color:#cbd5e1;
+    margin-bottom:60px;
+    text-transform:capitalize;
+}
+
+/* KAFLE */
+
+.apps{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.row{
+    display:flex;
+    gap:25px;
+    justify-content:center;
+}
+
+.app{
+
+    width:220px;
+    height:180px;
+
+    border-radius:24px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    transition:all .25s ease;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.3);
+}
+
+.logo{
+    width:72px;
+    height:72px;
+    object-fit:contain;
+    margin-bottom:12px;
+}
+
+.app-name{
+    font-size:22px;
+    font-weight:600;
+    text-align:center;
+}
+
+/* ZAZNACZENIE */
+
+.selected{
+
+    border:4px solid #38bdf8;
+
+    transform:scale(1.08);
+
+    box-shadow:
+        0 0 35px rgba(56,189,248,.6),
+        0 12px 35px rgba(0,0,0,.5);
+
+    z-index:5;
+}
+
+/* KOLORY */
+
+.youtube{
+    background:linear-gradient(
+        135deg,
+        #ff3636,
+        #cc0000
+    );
+}
+
+.netflix{
+    background:linear-gradient(
+        135deg,
+        #e50914,
+        #92000a
+    );
+}
+
+.spotify{
+    background:linear-gradient(
+        135deg,
+        #1ed760,
+        #0f8f3b
+    );
+}
+
+.tidal{
+    background:linear-gradient(
+        135deg,
+        #333333,
+        #000000
+    );
+}
+
+.canal{
+    background:linear-gradient(
+        135deg,
+        #0055ff,
+        #00289a
+    );
+}
+
+.prime{
+    background:linear-gradient(
+        135deg,
+        #00a8e1,
+        #005f7f
+    );
+}
+
+.disney{
+    background:linear-gradient(
+        135deg,
+        #2348ff,
+        #08144b
+    );
+}
+
+.plex{
+    background:linear-gradient(
+        135deg,
+        #ffb300,
+        #b76f00
+    );
+}
+
+.kodi{
+    background:linear-gradient(
+        135deg,
+        #17b6ff,
+        #0066a8
+    );
+}
+
+.smartthings{
+    background:linear-gradient(
+        135deg,
+        #1da1ff,
+        #0057aa
+    );
+}
+
+.settings{
+    background:linear-gradient(
+        135deg,
+        #64748b,
+        #334155
+    );
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="clock" class="clock">00:00</div>
+
+<div id="date" class="date">...</div>
+
 <div class="apps">
 
     <div class="row">
 
         <div class="app youtube selected">
-            <img class="logo" src="assets/youtube.png">
+            <img class="logo" src="assets/youtube.png" alt="">
             <div class="app-name">YouTube</div>
         </div>
 
         <div class="app netflix">
-            <img class="logo" src="assets/netflix.png">
+            <img class="logo" src="assets/netflix.png" alt="">
             <div class="app-name">Netflix</div>
         </div>
 
         <div class="app spotify">
-            <img class="logo" src="assets/spotify.png">
+            <img class="logo" src="assets/spotify.png" alt="">
             <div class="app-name">Spotify</div>
         </div>
 
         <div class="app tidal">
-            <img class="logo" src="assets/tidal.png">
+            <img class="logo" src="assets/tidal.png" alt="">
             <div class="app-name">Tidal</div>
         </div>
 
         <div class="app canal">
-            <img class="logo" src="assets/canalplus.png">
+            <img class="logo" src="assets/canalplus.png" alt="">
             <div class="app-name">CANAL+</div>
         </div>
 
@@ -53,4 +265,133 @@
 
     </div>
 
+    <div class="row">
+
+        <div class="app settings">
+            <div class="app-name">⚙ Ustawienia</div>
+        </div>
+
+    </div>
+
 </div>
+
+<script>
+
+/* ZEGAR */
+
+function updateClock(){
+
+    const now = new Date();
+
+    document.getElementById("clock").innerText =
+        now.toLocaleTimeString("pl-PL",{
+            hour:"2-digit",
+            minute:"2-digit"
+        });
+
+    document.getElementById("date").innerText =
+        now.toLocaleDateString("pl-PL",{
+            weekday:"long",
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        });
+}
+
+updateClock();
+setInterval(updateClock,1000);
+
+/* NAWIGACJA */
+
+const rows =
+    document.querySelectorAll(".row");
+
+let currentRow = 0;
+let currentCol = 0;
+
+function updateSelection(){
+
+    document
+        .querySelectorAll(".app")
+        .forEach(app=>{
+            app.classList.remove("selected");
+        });
+
+    rows[currentRow]
+        .children[currentCol]
+        .classList.add("selected");
+}
+
+document.addEventListener("keydown",function(e){
+
+    switch(e.key){
+
+        case "ArrowLeft":
+
+            currentCol =
+                Math.max(0,currentCol-1);
+
+            break;
+
+        case "ArrowRight":
+
+            currentCol =
+                Math.min(
+                    rows[currentRow].children.length-1,
+                    currentCol+1
+                );
+
+            break;
+
+        case "ArrowUp":
+
+            currentRow =
+                Math.max(0,currentRow-1);
+
+            currentCol =
+                Math.min(
+                    currentCol,
+                    rows[currentRow].children.length-1
+                );
+
+            break;
+
+        case "ArrowDown":
+
+            currentRow =
+                Math.min(
+                    rows.length-1,
+                    currentRow+1
+                );
+
+            currentCol =
+                Math.min(
+                    currentCol,
+                    rows[currentRow].children.length-1
+                );
+
+            break;
+
+        case "Enter":
+
+            const appName =
+                rows[currentRow]
+                .children[currentCol]
+                .querySelector(".app-name")
+                .innerText;
+
+            alert("Wybrano: " + appName);
+
+            break;
+    }
+
+    updateSelection();
+
+});
+
+updateSelection();
+
+</script>
+
+</body>
+</html>
